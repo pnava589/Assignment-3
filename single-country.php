@@ -48,7 +48,7 @@
          
          <link rel="stylesheet" href="css/bootstrap.min.css" />
          <link rel="stylesheet" href="css/bootstrap-theme.css" />
-         <link rel="stylesheet" href="css/assignement-01.css" />
+         <link rel="stylesheet" href="css/pedro.css" />
 
          
     </head>
@@ -93,7 +93,7 @@
                         
                         <?php
                             $db = new ImageDetailsGateway($connection);
-                            $sql = "SELECT Path, ImageID FROM ImageDetails WHERE CountryCodeISO ='".$countryISO."'";
+                            
                             $result = $db->findParamByField(array('Path','ImageID'), $countryISO, 'CountryCodeISO');
                             printSmall($result,'single-image.php?id=', 'ImageID');
                         ?>

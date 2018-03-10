@@ -1,9 +1,4 @@
-<?php 
-
-include 'functions.php';
-$pdo = getPDO();
-
-?>
+<?php include 'includes/travel-config.php';?>
 <!DOCTYPE html>
 <html lang="en">
 

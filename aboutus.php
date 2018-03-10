@@ -28,8 +28,11 @@
                     <div class="col-md-10">
                         <div class="jumbotron" id="postJumbo">
                         <h2>About Us</h2>
-                        <p>This assignment was created by Pedro Navas.<br/> It was created as first
-                         assignment for COMP 3512.</p> 
+                        <p>
+                        <strong>Juan Jimenez</strong>, collaboration focused on the implementation of the 2 layer design and integration with the first assignment.<br/> 
+                        <strong>Sarf Kermali</strong>, collaboration focused on the styling of the site and integration with the code repository.<br/>
+                        <strong>Pedro Navas</strong>, collaboration focused on the conceptual design of the project and problem fixing of code. 
+                         </p> 
                          <hr>
                          <h4>External Resources Used </h4>
                          <div class="panel panel-info">
