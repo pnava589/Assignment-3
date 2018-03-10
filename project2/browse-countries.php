@@ -1,6 +1,5 @@
 
-<?php include "functions.php" ;
-$pdo = getPDO()?>
+<?php include 'includes/travel-config.php';?>
 
 <!DOCTYPE html>
 
@@ -40,7 +39,12 @@ $pdo = getPDO()?>
                         <div class="panel-heading">Countries with images </div>
                         <div class="panel-body">
                             
-                            <?php displayLinks($pdo);?>
+                            <?php //displayLinks($pdo);
+                            $db = new CountriesGateway($connection);
+                            $result = $db->retrieveRecords($db->getBrowseCountriesStatement());
+                            displayLinks($result);
+                            $connection = null;
+                            ?>
                        
                     </div>
                         

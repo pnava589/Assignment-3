@@ -2,17 +2,17 @@
 
 
 
-function displayLinks($pdo){
+function displayLinks($result){
 
 
-$sql = "select c.CountryName,c.ISO from Countries c inner join ImageDetails i on i.CountryCodeISO = c.ISO group by c.CountryName";
-$result = $pdo -> query($sql);
+//$sql = "select c.CountryName,c.ISO from Countries c inner join ImageDetails i on i.CountryCodeISO = c.ISO group by c.CountryName";
+//$result = $pdo -> query($sql);
 
     
-    while($row = $result->fetch())
+    foreach($result as $row)
     {
         echo '<div class="col-md-3">';
-        echo  '<div><a href="single-country.php?code='.$row['ISO'].'">'. $row["CountryName"].'</a></div>';
+        echo  '<div><a href="single-country.php?id='.$row['ISO'].'">'. $row["CountryName"].'</a></div>';
         echo '</div>';
     }
     
@@ -87,12 +87,11 @@ function getCountryName($code,$pdo) //this method was necessary to get only the 
 /* ------------------------------------------SINGLE COUNTRY FUNCTION(S)---------------------------------------------------------- */
 
 
-function displayUsers($pdo)
+function displayUsers($result)
 {
     
-    $sql = "select Firstname, Lastname, UserID from Users order by Lastname";
-    $result = $pdo-> query($sql);
-    while($row = $result->fetch())
+   
+   foreach($result as $row)
     {
          echo '<div class="col-md-3">';
          $name = utf8_encode($row["Firstname"]);
@@ -346,21 +345,40 @@ header("Location:error.php");
 }
 
 
-function getPDO()
+function queryStringExists($id){
+  
+   if ( !isset($id) || empty($id)){
+       return false;
+   }
+   else{
+       return true;
+   }
+}
+function emptyset($result)
 {
-$pdo = new PDO('mysql:dbname=travel;charset=utf8mb4;','pnava589','');
-try {
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    if( count($result) == 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+                
 }
- catch (PDOException $e) {
-         die( $e->getMessage());
-         
-// code obtained from lab 4 from my project                             
+function printSmall($result, $link, $id)
+{
+    while($row = $result->fetch())
+    {
+        
+        $num =$row["$id"];
+        echo '<div class ="col-md-1">' ;
+        echo '<a href = "' .$link.''.$num.'">';
+        echo '<img src ="/project2/images/square-small/'.$row['Path'].'">';
+        echo '</a>';
+        echo '</div>';
+    }
+}
 
-}
 
-    return $pdo; 
-}
 
 
 ?>

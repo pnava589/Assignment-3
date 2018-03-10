@@ -56,7 +56,7 @@ header("Location.error.php")
               <select name="country" class="form-control">
                 <option value="0">Select Country</option>
                 <?php 
-                  /*  Dislay dropdown menu of continents */
+                  /*  Dislay dropdown menu of countries */
                 $sql = 'SELECT coun.CountryName, coun.ISO FROM Countries coun JOIN ImageDetails image ON coun.ISO = image.CountryCodeISO GROUP BY coun.ISO ORDER BY coun.CountryName';
                       $result = $pdo -> query($sql);
                      
@@ -70,7 +70,7 @@ header("Location.error.php")
                       
                
                 
-                /* display list of countries */ 
+                /* display list of cities */ 
                 ?>
               </select>   
               <select name="city" class="form-control">

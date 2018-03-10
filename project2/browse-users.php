@@ -1,6 +1,5 @@
 
-<?php include "functions.php" ;
-$pdo = getPDO()?>
+<?php include 'includes/travel-config.php';?>
 
 <!DOCTYPE html>
 
@@ -33,7 +32,10 @@ $pdo = getPDO()?>
             <div class="panel panel-info">
                 <div class="panel-heading">Users </div>
                 <div class="panel-body">
-                    <?php displayUsers($pdo) ?>
+                    <?php 
+                    $db = new UsersGateway($connection);
+                    $result = $db->findParamSorted(array('Firstname','Lastname','UserID'));
+                    displayUsers($result) ?>
                 </div>
                     
                 </div>

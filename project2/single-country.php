@@ -1,11 +1,34 @@
 
-<?php
-
-include "functions.php" ;
-$pdo = getPDO();
+<?php include 'includes/travel-config.php';
 
 
+        $countryISO = $_GET['id'];
+            if(!queryStringExists($countryISO))
+                {
+                    redirect() ;
+                }
+            else
+                {
+                    $db = new CountriesGateway($connection);
+                    $result = $db->findById($countryISO);
+                    
+                    if(emptyset($result))
+                    {
+                        redirect() ;
+                    }
+                    
+                       
+                                
+                                $name = $result['CountryName'];
+                                $area = $result['Area'];
+                                $capital = $result['Capital'];
+                                $population = $result['Population'];
+                                $currency = $result['CurrencyName'];
+                                $descretpion = utf8_encode($result['CountryDescription']);
+                       
+                }
 ?>
+
 
 <!DOCTYPE html>
 
@@ -33,60 +56,53 @@ $pdo = getPDO();
         
         <?php include 'includes/header.php' ?>
         
-        <main class ="container">
+<main class ="container">
             
-             <div class="row">
-                     <div >
-                        <div class="jumbotron" id="postJumbo">
-                            
-                        <?php 
-                                $result = displaySingleCountry($_GET["code"],$pdo);
-                        
-                               while($row = $result->fetch())
-                                {
-                                  echo '<h3>'.$row["CountryName"]."</h3>";
-                                  echo 'Captial : <strong>'.$row["Capital"].'</strong><br>';
-                                  echo 'Area : <strong>'.$row["Area"].' </strong> sq km<br>';
-                                 echo 'Currency Name: <strong>'.$row["CurrencyName"].'</strong><br>';
-                                 echo $row["CountryDescription"];
-                                 }
-                        
-                        ?>
-                        
-                        
-                        </div> 
-                    </div>    
-                </div> 
-                
-               
-                <div class="row">
-                <div >
-                   
-                            
-                            <?php 
-                            
-                          $countryName = getCountryName($_GET["code"],$pdo); //method created to extract only the country name 
-                          $result=  getImagesbyCountry($_GET["code"],$pdo);
-                          
-                          $country = $countryName->fetch();
-                          
-                          echo '<div class="panel panel-info">';
-                          echo '<div class="panel-heading">Images from '.$country["CountryName"].'</div>';
-                          echo '<div class="panel-body">';
-                          
-                          
-                          displayCountryImages($result);   //shared function with single-user.php
-                          
-                          echo  '</div';
-                          echo '</div>';
-                              ?>
-                            
-                        </div>
+            <div class = "row bg-alter">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <h2><?php echo $name ?></h2>
                     </div>
                     
-                  
+                    <div class="col-md-12">
+                        <p> Capital:  <b><?php echo $capital ?></b><p>
+                    </div>
+                    <div class="col-md-12">
+                        <p> Area: <b><?php echo $area ?></b> sq km.<p>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <p> Population: <b><?php echo $population ?></b><p>
+                    </div>
+                    <div class="col-md-12">
+                        <p> Currency Name: <b><?php echo $currency ?></b><p>
+                    </div>
+                    <div class="col-md-12">
+                        <p><?php echo $descretpion ?> </p>
+                    </div>
+                    
+                </div>
+            </div>
+            <br>
+            <div class = "row">
+                <div class= "bottom-container">
+                    <div class= "panel panel-info">
+                        <div class ="panel-heading"> Images from <?php echo $name ?> </div>
+                        <div class ="panel-body">
+                        
+                        <?php
+                            $sql = "SELECT Path, ImageID FROM ImageDetails WHERE CountryCodeISO ='".$countryISO."'";
+                            $result = $pdo -> query($sql);
+                            printSmall($result,'single-image.php?id=', 'ImageID');
+                        ?>
+                       
+                        </div>
+                    </div>
+                </div>
+            </div>
             
         </main>
+
         
         <?php include 'includes/footer.php' ?>
         
