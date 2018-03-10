@@ -92,6 +92,7 @@
                         
                         <?php
                             $sql = "SELECT Path, ImageID FROM ImageDetails WHERE CountryCodeISO ='".$countryISO."'";
+                            $result = $db->findParamById(array('Path','ImageID'), $countryISO, 'CountryCodeISO');
                             $result = $pdo -> query($sql);
                             printSmall($result,'single-image.php?id=', 'ImageID');
                         ?>

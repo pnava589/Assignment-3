@@ -46,6 +46,15 @@
             $statement = DatabaseHelper::runQuery($this->connection, $sql, array(':id' => $id));
             return $statement->fetch();
         }
+        
+        
+         public function findParamById($param, $id){
+            $sql = $this->select($param).' WHERE '.$this->getPrimaryKeyName().' = :id';
+            $statement = DatabaseHelper::runQuery($this->connection, $sql, array(':id' => $id));
+            return $statement->fetch();
+        }
+        
+        
         //finds certain fields
         public function findParam($param){
            $sql = $this->select($param);
