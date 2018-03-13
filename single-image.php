@@ -97,7 +97,7 @@
                                             <ul class="details-list">
                                                 
                                              <li>By: <a href="single-user.php?user=<?php echo $row["UserID"] ?>"><?php echo $row["FirstName"].' '.$row["LastName"] ?></a></li>
-                                             <li>Country: <a href="single-country.php?code=<?php echo$row["ISO"] ?>"><?php echo$row["CountryName"] ?></a></li>
+                                             <li>Country: <a href="single-country.php?id=<?php echo$row["ISO"] ?>"><?php echo$row["CountryName"] ?></a></li>
                                              <li>City: <?php echo$row["AsciiName"] ?></li>
                                                                             
                                             </ul>

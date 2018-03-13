@@ -1,6 +1,12 @@
-<?php include 'functions.php';
-$pdo = getPDO();
-header("Location.error.php")
+<?php include 'includes/travel-config.php';
+      $cont = $_GET["continent"];
+      $countri = $_GET["country"];
+      $tit = $_GET["title"];
+      $city = $_GET['city'];
+      $clear = false;
+        if( queryStringExists($cont)|| queryStringExists($countri) || queryStringExists($tit) || queryStringExists($city)){
+            $clear = true;
+            }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,17 +45,11 @@ header("Location.error.php")
                    
                    /*Displays dropdown menu of continents */
                    
-                      $query = 'SELECT c.ContinentName, c.ContinentCode from Continents c inner join ImageDetails i on i.ContinentCode = c.ContinentCode group by c.ContinentName';
-                      $result = $pdo -> query($query);
-                     
-                      while ($row = $result -> fetch()) 
-                      {
-                           echo '<option value ='.$row["ContinentCode"].'>';
-                           echo  $row["ContinentName"] ;
-                           echo '</option>';
-                      }
-               
-                ?>
+                      $db =new ContinentsGateway($connection);
+                      $result = $db->retrieveRecords($db->getDropdownStatement());
+                      foreach ($result as $row) { ?>
+                          <option value =<?php echo $row["ContinentCode"] ?>><?php echo  $row["ContinentName"] ?> </option>
+                      <?php } $db = null; ?>
                 
               </select>     
                 
@@ -57,42 +57,29 @@ header("Location.error.php")
                 <option value="0">Select Country</option>
                 <?php 
                   /*  Dislay dropdown menu of countries */
-                $sql = 'SELECT coun.CountryName, coun.ISO FROM Countries coun JOIN ImageDetails image ON coun.ISO = image.CountryCodeISO GROUP BY coun.ISO ORDER BY coun.CountryName';
-                      $result = $pdo -> query($sql);
-                     
-                      while ($row = $result -> fetch()) 
-                      {
-                           echo '<option value ='.$row["ISO"].'>';
-                           echo  $row["CountryName"] ;
-                           echo '</option>';
-                      }
-                      
-                      
-               
+                      $db =new CountriesGateway($connection);
+                      $result = $db->retrieveRecords($db->getDropdownStatement());
+                      foreach ($result as $row) { ?>
+                          <option value =<?php echo $row["ISO"] ?>><?php  echo  $row["CountryName"] ?></option>
+                      <?php } $db = null; ?>
                 
                 /* display list of cities */ 
                 ?>
               </select>   
               <select name="city" class="form-control">
                     <option value="0">Select City</option>
-                       <?php 
-                            
-                              
-                       $result = $pdo -> query(getCityList());
-                     
-                         while ($row = $result -> fetch()) 
-                              {
-                               echo '<option value ='.$row["CityCode"].'>';
-                               echo  $row["AsciiName"] ;
-                               echo '</option>';
-                               }
-                        ?>
+                      <?php 
+                      $db =new CitiesGateway($connection);
+                      $result = $db->retrieveRecords($db->getDropdownStatement());
+                      foreach ($result as $row) { ?>
+                            <option value =<?php echo $row["CityCode"]?>><?php echo  $row["AsciiName"] ?></option>
+                      <?php } $db = null; ?>
                </select>
                
                <input type="text"  placeholder="Search title" class="form-control" name=title>
               <button type="submit" class="btn btn-primary">Filter</button>
               
-              <button type="submit" class="btn btn-info">Default</button>
+             <?php if($clear){ echo '<button type="submit" class="btn btn-success">Clear</button>';}?>
               </div>
             </form>
 
@@ -102,24 +89,21 @@ header("Location.error.php")
                <ul class="caption-style-2">
                  <?php 
                       
-                     $sql = setDbSearch($_GET["continent"],$_GET["country"],$_GET["city"],$_GET["title"],$pdo);
+                     $result = setDbSearch($_GET["continent"],$_GET["country"],$_GET["city"],$_GET["title"],$connection);
                    
-                   while ($row = $sql -> fetch()) 
-                      {
-                          echo '<li>';
-                          echo '<a href="single-image.php?id='.$row['ImageID'].'"'.'class="img-responsive">';
-                          echo '<img src="images/square-medium/'.$row['Path'].'" alt="'.$row["Title"].'">';
-                          echo '<div class="caption">';
-                          echo  '<div class="blur"></div>';
-                          echo ' <div class="caption-text">';
-                          echo  '<p>'.$row["Title"].'</p>';
-                          echo '</div>';
-                          echo '</div>
-                                 </a>';
-                         echo '</li>';
-                      }
-                   
-                 ?>
+                   foreach($result as $row){ ?>
+                          <li>
+                          <a href="single-image.php?id=<?php echo$row['ImageID'] ?>"  class="img-responsive">
+                          <img src="images/square-medium/<?php echo $row['Path'] ?>" alt="<?php echo$row["Title"] ?>">
+                          <div class="caption">
+                          <div class="blur"></div>
+                          <div class="caption-text">
+                          <p><?php echo $row["Title"] ?></p>
+                          </div>
+                          </div>
+                          </a>
+                         </li>
+                      <?php } ?>
                  
                </ul>
 

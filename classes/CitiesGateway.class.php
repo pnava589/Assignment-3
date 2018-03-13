@@ -5,8 +5,8 @@
             parent::__construct($connection);
             $this->tableName = 'Cities';
         }
-        public function getSelectStatement(){
-            
+        public function getDropdownStatement(){
+            return 'select cit.AsciiName, cit.CityCode from Cities cit inner join ImageDetails i on cit.CityCode = i.CityCode group by cit.AsciiName';
         }
         public function getOrderFields(){
             return 'AsciiName';

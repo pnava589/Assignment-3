@@ -53,6 +53,11 @@
             $statement = DatabaseHelper::runQuery($this->connection, $sql, array(':id' => $id));
             return $statement->fetchAll();
         }
+        public function findParamByLike($param, $id, $feild){
+            $sql = $this->select($param).' WHERE '.$feild.' LIKE :id';
+            $statement = DatabaseHelper::runQuery($this->connection, $sql, array(':id' => $id));
+            return $statement->fetchAll();
+        }
         
         
         //finds certain fields

@@ -8,6 +8,9 @@
         public function getLeftNavStatement(){
             return 'select c.ContinentName, c.ContinentCode from Continents c inner join ImageDetails i on i.ContinentCode = c.ContinentCode group by i.ContinentCode';
         }
+        public function getDropdownStatement(){
+            return 'SELECT c.ContinentName, c.ContinentCode from Continents c inner join ImageDetails i on i.ContinentCode = c.ContinentCode group by c.ContinentName';
+        }
         public function getOrderFields(){
             return 'ContinentName';
         }
