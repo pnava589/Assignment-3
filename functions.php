@@ -346,7 +346,7 @@ function printSmall($result, $link, $id)
         $num =$row["$id"];
         echo '<div class ="col-md-1">' ;
         echo '<a href = "' .$link.''.$num.'">';
-        echo '<img src ="/project2/images/square-smal/'.$row['Path'].'">';
+        echo '<img src ="/project2/images/square-small/'.$row['Path'].'">';
         echo '</a>';
         echo '</div>';
     }
