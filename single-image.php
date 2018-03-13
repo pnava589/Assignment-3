@@ -29,14 +29,28 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">Continents</div>
                     <ul class="list-group">
-                        <?php displayContinentsLeft($pdo); ?>
+                        
+                            <?php 
+                                $db = new ContinentsGateway($connection);
+                                $result = $db->retrieveRecords($db->getLeftNavStatement());
+                                foreach($result as $row){?>
+                                    <li class="list-group-item">
+                                    <a href = "browse-images.php?continent=<?php echo $row["ContinentCode"]?>"> <?php echo $row["ContinentName"] ?></a></li>
+                            <?php } $db = null;?>
                         
                     </ul>
                 </div>
                     <div class="panel panel-info">
                         <div class="panel-heading">Popular</div>
                             <ul class="list-group">
-                                <?php displayCountriesLeft($pdo) ?>
+                                <?php
+                                    $db = new CountriesGateway($connection);
+                                    $result = $db->retrieveRecords($db->getLeftNavStatement());
+                                    foreach($result as $row){
+                                    ?>
+                                        <li class="list-group-item">
+                                        <a href = "single-country.php?id=<?php echo $row["ISO"]?>"> <?php echo $row["CountryName"] ?></a></li>
+                                <?php } $db = null;?>
                                 
                             </ul>
                         
@@ -49,16 +63,46 @@
                     <div class="row col-md-12">
                         <div class="col-md-8">
                             <?php 
-                                  
-                                showImage($pdo, $_GET["id"]);
-                                  
-                                 
-                                
+                            if(queryStringExists($_GET["id"]) )
+                            {
+                                $val = $_GET['id'];
+                            }
+                            else {
+                                echo '<h1>ID NOT FOUND</h1>';
+                                $val = '19';
+                            }
+                           
+                                  $db = new ImageDetailsGateway($connection);
+                                  $result = $db->findParamByField(array("Path","Title","Description"),$val,"ImageID" );
+                                  foreach ($result as $picture) { 
                             ?>
+                                    
+                            
+                                 <img class="img-responsive" src="images/medium/<?php echo $picture["Path"] ?>" alt="<?php echo $picture['Title'] ?>" >
+                                 <p class="description"><?php echo $picture['Description'] ?></p> <?php } $db = null; ?>
+                                 </div>
+                                
+                            
                             
                         
                         <div class="col-md-4">
-                            <?php showRightColumn($pdo,$_GET["id"]) ?>
+                            <?php 
+                                    $db = new ImageDetailsGateway($connection);
+                                    $result = $db->retrieveRecords($db->getRightDetails(),$val);
+                                    foreach($result as $row){
+                                    ?>
+                                    <h2><?php echo $row["Title"] ?></h2>
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <ul class="details-list">
+                                                
+                                             <li>By: <a href="single-user.php?user=<?php echo $row["UserID"] ?>"><?php echo $row["FirstName"].' '.$row["LastName"] ?></a></li>
+                                             <li>Country: <a href="single-country.php?code=<?php echo$row["ISO"] ?>"><?php echo$row["CountryName"] ?></a></li>
+                                             <li>City: <?php echo$row["AsciiName"] ?></li>
+                                                                            
+                                            </ul>
+                                        </div>
+                                    </div> <?php } ?>
                             
                             
                            <div class="btn-group btn-group-justified" role="group" aria-label="...">

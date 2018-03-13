@@ -17,9 +17,9 @@
                         }
                         
                     
-                          $name = utf8_encode($result['FirstName']).' '.utf8_encode($result['LastName']);
-                          $adress = utf8_encode($result['Address']);
-                          $rest = utf8_encode($result['City']).' '.utf8_encode($result['Region']).' '.utf8_encode($result['Country']).' '.utf8_encode($result['Postal']);
+                          $name = $result['FirstName'].' '.$result['LastName'];
+                          $adress = $result['Address'];
+                          $rest = $result['City'].' '.$result['Region'].' '.$result['Country'].' '.$result['Postal'];
                           $phone = $result['Phone'];
                           $email = $result['Email'];
                    

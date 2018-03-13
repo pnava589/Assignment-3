@@ -88,8 +88,14 @@
             return $statement;
         }
         //this function slects by paramaters
-        public function retrieveRecords($sql){
-            $statement = DatabaseHelper::runQuery($this->connection,$sql,null);
+        public function retrieveRecords($sql,$id=null){
+            if(isset($id)){
+                $statement = DatabaseHelper::runQuery($this->connection,$sql, array(':id' => $id));
+            }
+            else{
+               $statement = DatabaseHelper::runQuery($this->connection,$sql,null); 
+            }
+            
            return $statement->fetchAll();
         }
             
