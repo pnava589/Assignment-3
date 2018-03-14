@@ -94,7 +94,7 @@
                         <?php
                             $db = new ImageDetailsGateway($connection);
                             
-                            $result = $db->findParamByField(array('Path','ImageID'), $countryISO, 'CountryCodeISO');
+                            $result = $db->findParamByField(array('Path','ImageID','Latitude','Longitude'), $countryISO, 'CountryCodeISO');
                             printSmall($result,'single-image.php?id=', 'ImageID');
                         ?>
                        

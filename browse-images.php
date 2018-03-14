@@ -1,4 +1,6 @@
+
 <?php include 'includes/travel-config.php';
+      
       $cont = $_GET["continent"];
       $countri = $_GET["country"];
       $tit = $_GET["title"];
@@ -7,6 +9,7 @@
         if( queryStringExists($cont)|| queryStringExists($countri) || queryStringExists($tit) || queryStringExists($city)){
             $clear = true;
             }
+           
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,3 +117,7 @@
   </body>
   <?php include 'includes/footer.php' ?>
 </html>
+
+
+
+

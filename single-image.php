@@ -66,20 +66,26 @@
                             if(queryStringExists($_GET["id"]) )
                             {
                                 $val = $_GET['id'];
+                                
                             }
+                            
+                            
                             else {
                                 echo '<h1>ID NOT FOUND</h1>';
                                 $val = '19';
                             }
                            
                                   $db = new ImageDetailsGateway($connection);
-                                  $result = $db->findParamByField(array("Path","Title","Description"),$val,"ImageID" );
+                                  $result = $db->findParamByField(array("Path","Title","Description","Latitude","Longitude"),$val,"ImageID" );
                                   foreach ($result as $picture) { 
                             ?>
                                     
                             
                                  <img class="img-responsive" src="images/medium/<?php echo $picture["Path"] ?>" alt="<?php echo $picture['Title'] ?>" >
-                                 <p class="description"><?php echo $picture['Description'] ?></p> <?php } $db = null; ?>
+                                 <p class="description"><?php echo $picture['Description'] ?></p> <?php }
+                                 $lat = $picture["Latitude"];
+                                 $long = $picture["Longitude"];
+                                 $db = null; ?>
                                  </div>
                                 
                             
@@ -124,6 +130,30 @@
                         
                         
                                    
+                        </div>
+                        
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-8">
+                          <div id="map"></div>
+                            <script>
+                            let lati = <?php echo $lat?>;
+                            let long = <?php echo $long?>;
+                              function initMap() {
+                                var uluru = {lat: lati, lng: long};
+                                var map = new google.maps.Map(document.getElementById('map'), {
+                                  zoom: 4,
+                                  center: uluru
+                                });
+                                var marker = new google.maps.Marker({
+                                  position: uluru,
+                                  map: map
+                                });
+                              }
+                            </script>
+                            <script async defer
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxunrvg-UlRcw2e2TyQ1zH4Yf2N4Cf9GU&callback=initMap">
+                            </script>
                         </div>
                         
                     </div>
