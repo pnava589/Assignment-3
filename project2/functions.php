@@ -233,18 +233,7 @@ function showRightColumn($pdo,$id)    // right column on the single-image.php
    
     while($row = $result->fetch())
     {
-    echo '<h2>'.$row["Title"].'</h2>';
-    echo' <div class="panel panel-default">
-           <div class="panel-body">
-            <ul class="details-list">';
-            
-     echo '<li>By: <a href="single-user.php?user='.$row["UserID"].'">'.$row["FirstName"].' '.$row["LastName"].'</a></li>';
-     echo '<li>Country: <a href="single-country.php?code='.$row["ISO"].'">'.$row["CountryName"].'</a></li>';
-     echo '<li>City: '.$row["AsciiName"].'</li>';
-                                        
-     echo  '</ul>
-        </div>
-        </div>';
+   
       }
     }
         
@@ -279,59 +268,44 @@ return $sql;
 /* -----------------------------------------MENU FUNCTIONS-------------------------- */
 
 
-function setDbSearch($continent,$country,$city,$title,$pdo)
+function setDbSearch($continent,$country,$city,$title,$connection)
 {
-  
+  $db = new ImageDetailsGateway($connection);
    if(empty($continent)&&(empty($country))&&(empty($city))&&(empty($title)))
    {
        $sql= "select * from ImageDetails";
-       $statement = $pdo->prepare($sql);
-       $statement->bindvalue("",$continent);
-       $statement->execute();
-       return $statement;
+       $result = $db->getAll();
        
    }
    else if(!empty($continent))
    {
        $sql = 'SELECT Path, CountryCodeISO, ImageID, Title FROM ImageDetails WHERE ContinentCode = "'.$continent.'"';
-       $statement = $pdo->prepare($sql);
-       $statement->bindvalue(":continent",$continent);
-       $statement->execute();
-       return $statement;
-       
+        $result = $db->findParamByField(array('Path','CountryCodeISO','ImageID','Title'),$continent,'ContinentCode');
    }
    
    else if(!empty($country))
    {
        $sql = 'SELECT Path, CountryCodeISO, ImageID, Title FROM ImageDetails WHERE CountryCodeISO = "'.$country.'"';
-       $statement = $pdo->prepare($sql);
-       $statement->bindvalue(":country",$country);
-       $statement->execute();
-       return $statement;
-       
+       $result = $db->findParamByField(array('Path','CountryCodeISO','ImageID','Title'),$country,'CountryCodeISO');
    }
    
    else if(!empty($city))
    {
        
        $sql = 'SELECT Path, CountryCodeISO, ImageID, Title FROM ImageDetails WHERE CityCode = "'.$city.'"';
-        $statement = $pdo->prepare($sql);
-       $statement->bindvalue(":city",$city);
-       $statement->execute();
-       return $statement;
+       $result = $db->findParamByField(array('Path', 'CountryCodeISO', 'ImageID', 'Title'),$city,'CityCode');
    }
    
    else if(!empty($title))
    {
        
         $sql = 'SELECT Path, ImageID, Title, Description, CityCode, CountryCodeISO, ContinentCode FROM ImageDetails WHERE Title LIKE"%'.$title.'%";"';
-        $statement = $pdo->prepare($sql);
-       $statement->bindvalue(":title","%$title%");
-       $statement->execute();
-       return $statement;
-       
+        $result = $db->findParamByLike(array('Path', 'ImageID', 'Title', 'Description', 'CityCode', 'CountryCodeISO', 'ContinentCode'),"%$title%",'Title');
        
    }
+   $db=null;
+   return $result;
+   
     
 }
 
@@ -366,7 +340,7 @@ function emptyset($result)
 }
 function printSmall($result, $link, $id)
 {
-    while($row = $result->fetch())
+    foreach($result as $key=>$row)
     {
         
         $num =$row["$id"];

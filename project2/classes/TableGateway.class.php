@@ -48,10 +48,15 @@
         }
         
         
-         public function findParamById($param, $id){
-            $sql = $this->select($param).' WHERE '.$this->getPrimaryKeyName().' = :id';
+         public function findParamByField($param, $id, $feild){
+            $sql = $this->select($param).' WHERE '.$feild.' = :id';
             $statement = DatabaseHelper::runQuery($this->connection, $sql, array(':id' => $id));
-            return $statement->fetch();
+            return $statement->fetchAll();
+        }
+        public function findParamByLike($param, $id, $feild){
+            $sql = $this->select($param).' WHERE '.$feild.' LIKE :id';
+            $statement = DatabaseHelper::runQuery($this->connection, $sql, array(':id' => $id));
+            return $statement->fetchAll();
         }
         
         
@@ -88,8 +93,14 @@
             return $statement;
         }
         //this function slects by paramaters
-        public function retrieveRecords($sql){
-            $statement = DatabaseHelper::runQuery($this->connection,$sql,null);
+        public function retrieveRecords($sql,$id=null){
+            if(isset($id)){
+                $statement = DatabaseHelper::runQuery($this->connection,$sql, array(':id' => $id));
+            }
+            else{
+               $statement = DatabaseHelper::runQuery($this->connection,$sql,null); 
+            }
+            
            return $statement->fetchAll();
         }
             

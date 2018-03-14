@@ -27,6 +27,7 @@
                                 $descretpion = utf8_encode($result['CountryDescription']);
                        
                 }
+                $db = null;
 ?>
 
 
@@ -47,7 +48,7 @@
          
          <link rel="stylesheet" href="css/bootstrap.min.css" />
          <link rel="stylesheet" href="css/bootstrap-theme.css" />
-         <link rel="stylesheet" href="css/assignement-01.css" />
+         <link rel="stylesheet" href="css/pedro.css" />
 
          
     </head>
@@ -91,9 +92,9 @@
                         <div class ="panel-body">
                         
                         <?php
-                            $sql = "SELECT Path, ImageID FROM ImageDetails WHERE CountryCodeISO ='".$countryISO."'";
-                            $result = $db->findParamById(array('Path','ImageID'), $countryISO, 'CountryCodeISO');
-                            $result = $pdo -> query($sql);
+                            $db = new ImageDetailsGateway($connection);
+                            
+                            $result = $db->findParamByField(array('Path','ImageID','Latitude','Longitude'), $countryISO, 'CountryCodeISO');
                             printSmall($result,'single-image.php?id=', 'ImageID');
                         ?>
                        

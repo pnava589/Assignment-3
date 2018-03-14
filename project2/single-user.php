@@ -1,6 +1,34 @@
 
-<?php include "functions.php" ;
-$pdo = getPDO();?>
+<?php include 'includes/travel-config.php';
+             
+        
+            $UserID = $_GET['user'];
+            if( !queryStringExists($UserID))
+                {
+                    redirect() ;
+                }
+            else
+                {
+                    $db = new UsersGateway($connection);
+                    $result = $db->findById($UserID);
+                    if( emptyset($result))
+                        {
+                         redirect();
+                        }
+                        
+                    
+                          $name = $result['FirstName'].' '.$result['LastName'];
+                          $adress = $result['Address'];
+                          $rest = $result['City'].' '.$result['Region'].' '.$result['Country'].' '.$result['Postal'];
+                          $phone = $result['Phone'];
+                          $email = $result['Email'];
+                   
+                   
+                    
+                }
+                $db = null;
+?>
+
 
 <!DOCTYPE html>
 
@@ -19,7 +47,7 @@ $pdo = getPDO();?>
          
          <link rel="stylesheet" href="css/bootstrap.min.css" />
          <link rel="stylesheet" href="css/bootstrap-theme.css" />
-         <link rel="stylesheet" href="css/assignement-01.css" />
+         <link rel="stylesheet" href="css/pedro.css" />
 
          
     </head>
@@ -30,51 +58,48 @@ $pdo = getPDO();?>
         
         <!-- end of header  -->
         
-        <main class="container">
-        
-        <div class="row">
-            <div class="col-md-12">
-                <div class="jumbotron">
-                    
-                    <?php 
-                    $statement = userInfo($_GET["user"],$pdo) ;
-                    
-                     while($row = $statement->fetch())
-                         {
-                             echo '<h3>'.$row["Firstname"].' '.$row["Lastname"].'</h3>';
-                             echo '<div class="col-md-12">'.$row["Address"].' </div><br/>';
-                             echo '<div class="col-md-12">'.$row["City"].' <br/></div><br/>';
-                             echo '<div class="col-md-12">'.$row["Phone"].' <br/></div><br/>';
-                             echo '<div class="col-md-12">'.$row["Email"].' <br/></div><br/>';
-                         }
-                    
-                    
-                             echo '</div>';
-                 
-                             $userName = getUserName( $_GET["user"],$pdo);
-                             $statement = getCountriesbyUsers($pdo, $_GET["user"]); // I needed another get method because I could not include the anel header in the loop and the fetch() was dropiing the first record. 
-                             
-                             $record = $userName->fetch();
-                             echo '<div class="panel panel-info">';
-                             echo '<div class="panel-heading">Images by '.$record["FirstName"].' '.$record["LastName"].'</div>';
-                             echo '<div class="panel-body">';
-                             
-                             
-                             displayCountryImages($statement); //shared function with single-country.php
-                    
-                             echo  '</div';
-                             echo '</div>';
-                            ?>
-                            
-                          
+        <main class = "container">
+             <div class = "row bg-alter">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <h2><?php echo $name ?></h2>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <p> <?php echo $adress ?><p>
+                        </div>
+                        <div class="col-md-12">
+                            <p> <?php echo $rest ?><p>
+                        </div>
+                        <div class="col-md-12">
+                            <p> <?php echo $phone ?><p>
+                        </div>
+                        <div class="col-md-12">
+                            <p> <?php echo $email ?><p>
+                        </div>
+                        
+                    </div>
                 </div>
-                
-            </div>
-            
-        </div>
-        
-        
-        </main>
+                <br>
+                <div class = "row">
+                    
+                    <div class= "bottom-container">
+                        <div class= "panel panel-info">
+                            <div class ="panel-heading"> Images By <?php echo $name ?> </div>
+                            <div class="panel-body">
+                            
+                            <?php
+                            $db = new ImageDetailsGateway($connection);
+                            $result = $db->findParamByField(array('Path','ImageID'), $UserID, 'UserID');
+                            printSmall($result,'single-image.php?id=', 'ImageID');
+                            ?>
+                            </div>
+                        </div>
+                        </div>
+                    
+                </div>
+                </main>
+
          <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
        

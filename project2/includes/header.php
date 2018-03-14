@@ -40,6 +40,7 @@
                                 <li><a href="browse-users.php">Users</a></li>
                                 <li><a href="Index.php">Home</a></li>
                                 <li><a href="aboutus.php">About Us</a></li>
+                                <li><a href="browse-posts.php">Posts</a></li>
                                <!-- <li><a href="browse-users">Users</a></li> !-->
                             </ul>
                         </li>

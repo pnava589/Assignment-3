@@ -1,0 +1,10 @@
+>>> IN BASH <<<
+
+Before working on the project, type:    git add *
+// this will add all file to the staging 
+
+After you're done working on it:   git commit -m "[ What changes you made ] (by [ yourname ])"
+
+Lastly, push the files to git hub:  git push -u origin master
+    
+    

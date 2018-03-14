@@ -1,5 +1,6 @@
 <?php
 class DatabaseHelper{
+    
     //this function creates the connection with the database and returns it
     //modeled from the lab6
     public static function createConnection($values=array()){
@@ -11,6 +12,8 @@ class DatabaseHelper{
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo; 
     }
+    
+    
     //this function runs query based upon the structure in lab6
     public static function runQuery($connection, $sql, $paramaters=array()){
         if(!is_array($paramaters)){
