@@ -17,5 +17,8 @@
         public function getTableName(){
             return 'Cities';
         }
+        public function getCitiesWithImages(){
+            return "select c.Latitude, c.Longitude from Cities c inner join ImageDetails i on i.CityCode = c.CityCode AND c.CountryCodeISO = :id group by c.AsciiName";
+        }
     }
 ?>

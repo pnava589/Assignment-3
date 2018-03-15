@@ -33,7 +33,15 @@
                         <div class="panel-heading"></div>
                         <div class="panel-body">
                             
-                            <h2>Missing or invalid query String</h2>
+                           <div class="jumbotron" id="postJumbo">
+                        <h2>ERROR MISSING OR INVALID QUERY STRING</h2>
+                        <p>
+                        <img class = "img-responsive" src = "/project2/images/image.png">;
+                         </p> 
+                         
+                        
+                        
+                        </div> 
                        
                     </div>
                         

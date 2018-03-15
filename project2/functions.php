@@ -308,6 +308,14 @@ function setDbSearch($continent,$country,$city,$title,$connection)
    
     
 }
+function searchBox($connection,$search){
+    $tit = $search;
+    $db = new ImageDetailsGateway($connection);
+    $result = $db->retrieveRecords("SELECT Path, ImageID, Title, Description, CityCode, CountryCodeISO, ContinentCode FROM ImageDetails WHERE Title OR Description LIKE :id", "%$tit%" );
+    $db = null;
+    return $result;
+    
+}
 
 /* -----------------------------------FILTER FUNCTION------------------------------------ */
 

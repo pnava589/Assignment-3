@@ -38,9 +38,9 @@
         <div class="panel panel-default">
           <div class="panel-heading">Filters</div>
           <div class="panel-body">
-            <form action="browse-images.php" method="get" class="form-horizontal">
+            <form action="browse-images.php" method="get" class="form-horizontal" id="selection">
               <div class="form-inline">
-              <select name="continent" class="form-control">
+              <select name="continent" class="form-control"  onchange='submitFunction(this)'>
                  <option value="0">Select Continent</option>
                 
                 
@@ -56,10 +56,10 @@
                 
               </select>     
                 
-              <select name="country" class="form-control">
+              <select name="country" class="form-control" id="selection" onchange='submitFunction(this)'>
                 <option value="0">Select Country</option>
                 <?php 
-                  /*  Dislay dropdown menu of countries */
+                  /*Display dropdown menu of countries */
                       $db =new CountriesGateway($connection);
                       $result = $db->retrieveRecords($db->getDropdownStatement());
                       foreach ($result as $row) { ?>
@@ -69,7 +69,7 @@
                 /* display list of cities */ 
                 ?>
               </select>   
-              <select name="city" class="form-control">
+              <select name="city" class="form-control" onchange='submitFunction(this)'>
                     <option value="0">Select City</option>
                       <?php 
                       $db =new CitiesGateway($connection);
@@ -79,21 +79,36 @@
                       <?php } $db = null; ?>
                </select>
                
-               <input type="text"  placeholder="Search title" class="form-control" name=title>
-              <button type="submit" class="btn btn-primary">Filter</button>
+              <input type="text"  placeholder="Search title" class="form-control" name=title onchange='submitFunction(this)'>
+               <!--<button type="submit" class="btn btn-primary">Filter</button>!-->
               
              <?php if($clear){ echo '<button type="submit" class="btn btn-success">Clear</button>';}?>
               </div>
             </form>
+            
+            <script>
+            
+              function submitFunction(content)
+              {
+                if(content.value)
+                {
+                  content.form.submit();
+                }
+              }
+              
+            </script>
 
           </div>
         </div>  
                
                <ul class="caption-style-2">
                  <?php 
-                      
+                      if(isset($_GET['search'])){
+                        $result = searchBox($connection,$_GET['search']);
+                      }
+                      else{
                      $result = setDbSearch($_GET["continent"],$_GET["country"],$_GET["city"],$_GET["title"],$connection);
-                   
+                      }
                    foreach($result as $row){ ?>
                           <li>
                           <a href="single-image.php?id=<?php echo$row['ImageID'] ?>"  class="img-responsive">

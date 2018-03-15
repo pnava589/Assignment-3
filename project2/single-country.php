@@ -59,8 +59,8 @@
         
 <main class ="container">
             
-            <div class = "row bg-alter">
-                <div class="col-md-12">
+            <div class = "row ">
+                <div class="col-md-5 bg-alter">
                     <div class="col-md-12">
                         <h2><?php echo $name ?></h2>
                     </div>
@@ -83,6 +83,7 @@
                     </div>
                     
                 </div>
+                
             </div>
             <br>
             <div class = "row">

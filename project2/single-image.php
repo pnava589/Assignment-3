@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css" />
      <link rel="stylesheet" href="css/assignement-01.css" />
      <!-- <link rel="stylesheet" href="css/bootstrap.css" /> !-->
+     <script src="Javascript/functions.js" type="text/JavaScript"></script>
 </head>
 
 <body>
@@ -76,15 +77,17 @@
                             }
                            
                                   $db = new ImageDetailsGateway($connection);
-                                  $result = $db->findParamByField(array("Path","Title","Description","Latitude","Longitude"),$val,"ImageID" );
+                                  $result = $db->findParamByField(array("Path","Title","Description","Latitude","Longitude","CountryCodeISO"),$val,"ImageID" );
                                   foreach ($result as $picture) { 
                             ?>
                                     
                             
                                  <img class="img-responsive" src="images/medium/<?php echo $picture["Path"] ?>" alt="<?php echo $picture['Title'] ?>" >
-                                 <p class="description"><?php echo $picture['Description'] ?></p> <?php }
+                                 <!--<p class="description">!--><?php /*echo $picture['Description']*/ ?><!--</p>!--> <?php }
+                                 $description = $picture["Description"];
                                  $lat = $picture["Latitude"];
                                  $long = $picture["Longitude"];
+                                 $ContCode = $picture["CountryCodeISO"];
                                  $db = null; ?>
                                  </div>
                                 
@@ -128,21 +131,33 @@
                         </div> 
                         <!-- markup extracted from lab 2 !-->
                         
+                        <?php 
+                        $db = new CitiesGateway($connection);
+                        $result = $db->retrieveRecords($db->getCitiesWithImages(),$ContCode);
                         
+                        
+                        ?>
                                    
                         </div>
                         
                     </div>
-                    <div class="row col-md-12">
+                    <div class="row col-md-12 mt-1">
+                        <div class="col-md-4">
+                           <h3>Description </h3>
+                           <?php echo $description; ?>
+                        </div>
                         <div class="col-md-8">
-                          <div id="map"></div>
+                             <div id="map"></div>
+                          
                             <script>
+                            
                             let lati = <?php echo $lat?>;
                             let long = <?php echo $long?>;
+                            initMap(lati,lng);
                               function initMap() {
                                 var uluru = {lat: lati, lng: long};
                                 var map = new google.maps.Map(document.getElementById('map'), {
-                                  zoom: 4,
+                                  zoom: 10,
                                   center: uluru
                                 });
                                 var marker = new google.maps.Marker({
@@ -154,6 +169,7 @@
                             <script async defer
                             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxunrvg-UlRcw2e2TyQ1zH4Yf2N4Cf9GU&callback=initMap">
                             </script>
+                            
                         </div>
                         
                     </div>
