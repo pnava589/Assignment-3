@@ -94,8 +94,13 @@
         }
         //this function slects by paramaters
         public function retrieveRecords($sql,$id=null){
-            if(isset($id)){
-                $statement = DatabaseHelper::runQuery($this->connection,$sql, array(':id' => $id));
+            if(count($id) >= 2){
+                
+                $statement = DatabaseHelper::runQuery($this->connection,$sql, $id);
+                
+            }
+            else if(isset($id)){
+                 $statement = DatabaseHelper::runQuery($this->connection,$sql, array(':id' => $id));
             }
             else{
                $statement = DatabaseHelper::runQuery($this->connection,$sql,null); 

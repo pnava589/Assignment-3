@@ -23,5 +23,6 @@
         public function getRightDetails(){
             return 'SELECT c.AsciiName, i.ImageID,u.FirstName, u.LastName, coun.CountryName,coun.ISO, i.Title, u.UserID from Cities c, ImageDetails i, Users u, Countries coun where i.CityCode = c.CityCode and u.UserID = i.UserID and coun.ISO = i.CountryCodeISO and i.ImageID = :id';
         }
+       
     }
 ?>

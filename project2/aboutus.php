@@ -1,4 +1,4 @@
-
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,6 +47,7 @@
                                 <li class="list-group-item"><a href="https://web.csulb.edu/~mopkins/cecs470/labs/lab08-easyphp.pdf">Fundamentals of Web Development textbook</a></li>
                                 <li class="list-group-item"><a href="https://www.w3schools.com/">W3 Schools</a></li>
                                 <li class="list-group-item"><a href="https://dev.mysql.com/doc/">MySQL Documentation</a></li>
+                                <li class="list-group-item"><a href="https://developers.google.com/maps/documentation/javascript/">Google maps API</a></li>
                                 <li class="list-group-item"><a href="https://comp3512-php-3-pnava589.c9users.io/project2/chapter14-project2.php">Lab 4</a></li>
 
                 

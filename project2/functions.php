@@ -11,6 +11,7 @@ function displayLinks($result){
     
     foreach($result as $row)
     {
+
         echo '<div class="col-md-3">';
         echo  '<div><a href="single-country.php?id='.$row['ISO'].'">'. $row["CountryName"].'</a></div>';
         echo '</div>';
@@ -72,6 +73,17 @@ function getImagesbyCountry($country,$pdo)
      return $statement;
     
      
+}
+
+
+function displayCities($result)
+{
+    foreach($result as $row)
+    {
+        echo '<div class="col-md-3">';
+        echo  '<div><a href="single-city.php?id='.$row['CityCode'].'">'. $row["AsciiName"].'</a></div>';
+        echo '</div>';
+    }
 }
 
 function getCountryName($code,$pdo) //this method was necessary to get only the ountry name without affecting the list of images
@@ -358,6 +370,34 @@ function printSmall($result, $link, $id)
         echo '</a>';
         echo '</div>';
     }
+}
+function print_stars($num)
+{
+ $stars='';
+ $count = 5;
+  if($num >= 0 && $num <= 5)
+  {
+    while($num > 0 )
+     {
+      $stars = $stars .'<img src="/project2/images/star-gold.svg" width="16" />';
+      $num--;
+      $count--;
+     }
+     while($count > 0 )
+     {
+      $stars = $stars .'<img src="/project2/images/star-outline.svg" width="16" />';
+      $count--;
+     }
+  }
+  else
+  {
+   while($count > 0 )
+     {
+      $stars = $stars .'<img src="/project2/images/star-white.svg" width="16" />';
+      $count--;
+     }
+  }
+  return $stars;
 }
 
 

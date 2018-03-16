@@ -1,5 +1,5 @@
 
-<?php include 'includes/travel-config.php';
+<?php include 'includes/travel-config.php'; session_start();
       
       $cont = $_GET["continent"];
       $countri = $_GET["country"];

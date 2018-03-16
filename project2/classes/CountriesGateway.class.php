@@ -17,6 +17,11 @@
         public function getOrderFields(){
             return 'CountryName';
         }
+        
+        public function getCoordinatesofCountry()
+        {
+           return 'SELECT DISTINCT i.Latitude, i.Longitude from ImageDetails i, Countries c WHERE i.CountryCodeISO = c.ISO AND c.ISO = :id ';
+        }
         public function getPrimaryKeyName(){
             return 'ISO';
         }

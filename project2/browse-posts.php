@@ -1,4 +1,4 @@
-<?php include 'includes/travel-config.php';?>
+<?php include 'includes/travel-config.php'; session_start(); ?>
 
 <!DOCTYPE html>
 

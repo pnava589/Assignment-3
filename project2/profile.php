@@ -1,35 +1,44 @@
+<?php include 'includes/travel-config.php';
+session_start();
+if(!isset($_SESSION['UserID']) || $_SESSION['UserID'] == null){
+$_SESSION['Username'] = $_POST['username'];
+$_SESSION['Password'] = $_POST['pword'];
+}
+if(!isset($_SESSION['Username']) || $_SESSION['Password'] == null){
 
-<?php include 'includes/travel-config.php'; session_start();
-             
-        
-            $UserID = $_GET['user'];
-            if( !queryStringExists($UserID))
-                {
-                    redirect() ;
-                }
-            else
-                {
-                    $db = new UsersGateway($connection);
-                    $result = $db->findById($UserID);
-                    if( emptyset($result))
-                        {
-                         redirect();
-                        }
-                        
-                    
-                          $name = $result['FirstName'].' '.$result['LastName'];
+    header("Location: /project2/login.php?");
+    
+}
+else if(!isset($_SESSION['UserID']) || $_SESSION['UserID'] == null){
+        	
+
+            $db = new UserLoginGateway($connection);
+			$statement = $db->retrieveRecords( $db->getUsernameCheck(),$_POST['username']);
+		
+			foreach($statement as $result){
+			$str = $_SESSION['Password'].$result['Salt'];
+		
+			}
+			$pass = md5($str);
+			$statement = $db->retrieveRecords($db->getUserLoginCheck(), array(':user'=>$_POST['username'], ':pass'=>md5($str)));
+			
+			if(count($statement) > 0){
+					foreach($statement as $row){
+					$_SESSION['UserID'] = $row['UserID'];
+					}
+			}
+			else{
+			   header("Location: /project2/login.php?id=no");
+			}
+}
+$db = new UsersGateway($connection);
+$result = $db->findById($_SESSION['UserID']);
+						  $name = $result['FirstName'].' '.$result['LastName'];
                           $adress = $result['Address'];
                           $rest = $result['City'].' '.$result['Region'].' '.$result['Country'].' '.$result['Postal'];
                           $phone = $result['Phone'];
                           $email = $result['Email'];
-                   
-                   
-                    
-                }
-                $db = null;
 ?>
-
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -37,7 +46,7 @@
     <head>
         
         <meta charset="utf-8">
-         <title>Single User</title>
+         <title>Profile page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
        
       
@@ -85,12 +94,12 @@
                     
                     <div class= "bottom-container">
                         <div class= "panel panel-info">
-                            <div class ="panel-heading"> Images By <?php echo $name ?> </div>
+                            <div class ="panel-heading"> Your Images Uploads</div>
                             <div class="panel-body">
                             
                             <?php
                             $db = new ImageDetailsGateway($connection);
-                            $result = $db->findParamByField(array('Path','ImageID'), $UserID, 'UserID');
+                            $result = $db->findParamByField(array('Path','ImageID'), $_SESSION['UserID'], 'UserID');
                             printSmall($result,'single-image.php?id=', 'ImageID');
                             ?>
                             </div>

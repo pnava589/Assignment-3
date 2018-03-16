@@ -8,7 +8,7 @@
     <head>
         
         <meta charset="utf-8">
-         <title>Browse Countries</title>
+         <title>Browse Cities</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
        
       
@@ -36,13 +36,13 @@
                 
                 <div >
                     <div class="panel panel-info">
-                        <div class="panel-heading">Countries with images </div>
+                        <div class="panel-heading">Cities </div>
                         <div class="panel-body">
                             
-                            <?php //displayLinks($pdo);
-                            $db = new CountriesGateway($connection);
-                            $result = $db->retrieveRecords($db->getBrowseCountriesStatement());
-                            displayLinks($result);
+                            <?php 
+                            $db = new CitiesGateway($connection);
+                            $result = $db->retrieveRecords($db->getDropdownStatement());
+                            displayCities($result);
                             $connection = null;
                             ?>
                        
