@@ -26,27 +26,29 @@
         
         <main class="container">
             
-                <div class="row">
-                    <?php echo $_SESSION['UserID']?>
-                    <div class="col-md-6 col-md-offset-3 bg-alter">
-                        <h3><?php if ($_GET['id'] == 'no'){ echo 'Incorrect username or password'; } ?><?php if ($_GET['id'] == 'nop'){ echo 'Please enter a password and username'; } ?></h3>
+               
+                <div class = "row">
+                    
+                        <br>
+                        <?php if ($_GET['id'] == 'no'){ echo '<div class="alert alert-danger" role="alert"> Incorrect username or password </div>'; } ?>
                         <form action='/project2/profile.php' method='post' role='form'>
-                            <div class ='form-group'>
-                              <label for='username'><h3>Username</h3></label>
-                              <input type='text' name='username' class='form-control' value = "<?php echo $username?>" />
-                            </div>
-                            <div class ='form-group'>
-                              <label for='pword'><h3>Password</h3></label>
-                              <input type='password' name='pword' class='form-control'/>
-                              <br>
-                            </div>
-                            <br>
-                            <input type='submit' value='Login' class='form-control' />
-                            
-                            </form>
-                        
-                    </div>    
-                </div>    
+                        <div class="panel panel-default form-rounded">
+                          <div class="panel-heading">
+                            <h3 class="panel-title text-center">Login</h3>
+                          </div>
+                          <div class="panel-body">
+                                <label for='username'><h3>Username</h3></label>
+                              <input type='text' name='username' class='form-control form-rounded' value = "<?php echo $username ?>" />
+                          </div>
+                          <div class="panel-body">
+                                <label for='pword'><h3>Password</h3></label>
+                              <input type='password' name='pword' class='form-control form-rounded'/>
+                          </div>
+                          <div class="panel-body"><input type='submit' value='Login' class=' form-control form-rounded' /></div>
+                        </div>
+                        </form>
+                    
+                </div>
         </main>
         
         

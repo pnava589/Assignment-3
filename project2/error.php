@@ -20,37 +20,21 @@
 
          
     </head>
+    
     <body>
         
-       
+         <?php include "includes/header.php" ?>   
           
         <main class="container">
-            <div class="row">
-            <div class="col-md-10">
-                
-                <div >
-                    <div class="panel panel-info">
-                        <div class="panel-heading"></div>
-                        <div class="panel-body">
-                            
-                           <div class="jumbotron" id="postJumbo">
-                        <h2>ERROR MISSING OR INVALID QUERY STRING</h2>
-                        <p>
-                        <img class = "img-responsive" src = "/project2/images/image.png">;
-                         </p> 
-                         
-                        
-                        
-                        </div> 
-                       
-                    </div>
-                        
-                    </div>
-                    
-                </div>
-             
-            </div>
-          </div>
+            <div class="jumbotron">
+            <h1><i class="em-svg em-hushed"></i>  Ooops!</h1>
+            <p></br>Missing or non-integer querystring!</br> What would you like to do?</p>
+            <p></br>
+                <a class="btn btn-info btn-lg" href="browse-countries.php" role="button">Browse Countries</a>
+                <a class="btn btn-info btn-lg" href="browse-images.php" role="button">Browse Images</a>
+                <a class="btn btn-info btn-lg" href="browse-users.php" role="button">Browse Users</a>
+            </p>
+        </div>
         </main> 
            
             

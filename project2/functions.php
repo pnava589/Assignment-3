@@ -364,12 +364,27 @@ function printSmall($result, $link, $id)
     {
         
         $num =$row["$id"];
-        echo '<div class ="col-md-1">' ;
+        echo '<div id = "single-normal"class ="col-md-1 normal" onmouseover = "hover(this)" onmouseout ="OnMouseOut(this)">' ;
         echo '<a href = "' .$link.''.$num.'">';
         echo '<img src ="/project2/images/square-small/'.$row['Path'].'">';
         echo '</a>';
         echo '</div>';
     }
+    
+}
+function printHidden($result, $link, $id)
+{
+    foreach($result as $key=>$row)
+    {
+        
+        $num =$row["$id"];
+        echo '<div id = "single-medium"class ="col-md-1 hidden medium" onmouseover = "hover(this)" onmouseout ="OnMouseOut(this)">' ;
+        echo '<a href = "' .$link.''.$num.'">';
+        echo '<img src ="/project2/images/square-medium/'.$row['Path'].'">';
+        echo '</a>';
+        echo '</div>';
+    }
+    
 }
 function print_stars($num)
 {
@@ -399,8 +414,159 @@ function print_stars($num)
   }
   return $stars;
 }
+?>
 
 
+<?php
+/* -----------------------------------FAVORITES FUNCTIONS---------------------------------------------
+Note:
+- favorite list only has to last until the session expires for that particular user
+- remove all as soon as the session ends
+
+// change variable scopes
+// create sessions whenever favorite is added
+// create favorite button for post and images
+*/
+
+
+
+//add to favorite
+//if session exist then get the array from session and append it
+// else create a new array and add it to the session
+function addToFav($type,$id, $title, $img){
+    
+    //for POSTS
+    if($type == "post"){ 
+        
+        if(isset($_SESSION['favPosts'])){ //if session exists
+        
+            // get the session array
+            $arr = $_SESSION["favPosts"];
+            
+            //if the key doesnt exist in the array then add it to the existing array
+            if(!array_key_exists($id,$arr)){
+                
+                $arr[$id] = [$title, $img];
+                
+                //update the session
+                $_SESSION['favPosts']= $arr;
+                
+            }
+            
+        } else { //create new session
+            //create new array
+            $arr = array();
+            
+            //add to empty array
+            $arr[$id] = [$title, $img];
+            
+            //store array in session
+            $_SESSION['favPosts']=$arr;
+        }
+        
+        
+    }//end if
+    //for IMAGES
+    else if($type == "image"){
+        
+        //if there is a session for it
+        if(isset($_SESSION['favImages'])){ 
+        
+            // get the session array
+            $arr = $_SESSION["favImages"];
+            
+            //if the key doesnt exist in the array then add it to the existing array
+            if(!array_key_exists($id,$arr)){
+                
+                $arr[$id] = [$title, $img];
+                
+                //update the session
+                $_SESSION['favImages']= $arr;
+                
+            }
+            
+        } else { //create new session
+            //create new array
+            $arr = array();
+            
+            //add to empty array
+            $arr[$id] = [$title, $img];
+            
+            //store array in session
+            $_SESSION['favImages']=$arr;
+        }
+        
+    }//end else if
+    
+    //redirect to favs
+    //header("Location:");
+    
+}
+
+
+
+// Remove from favorite
+function removeFromFav($type,$id){
+    if($type == "post"){
+        if(!array_key_exists($id,$array)){
+            unset($array[$id]);
+        }
+    }
+    else if($type == "image"){
+        if(!array_key_exists($id,$array)){
+            unset($array[$id]);
+        }
+    }
+}
+
+
+
+//clear favorites
+function removeAllFav(){
+    unset($_SESSION["favPosts"]);
+    unset($_SESSION["favImages"]);
+}
+
+
+
+//print favourite list
+function displayFav($type){
+
+    if($type == "post"){
+        if(isset($_SESSION["favPosts"])){
+        
+        $favPosts = $_SESSION["favPosts"];
+        foreach ($favPosts as $key => $value){
+            echo '<div class="media">
+                <div class="media-left">
+                    <a href="single-post.php?id='.$key.'"><img class="media-object" src="/project2/images/square-small/'.$value[1].'" alt="'.$value[0].'"></a>
+                </div>
+                <div class="media-body">
+                    <h2 class="media-heading">'.$value[0].'</h2>
+                </div>
+            </div>';
+        }
+        }//end if
+    }
+    else if($type == "image"){
+        if(isset($_SESSION["favImages"])){
+            
+        $favImages = $_SESSION["favImages"];
+        foreach ($favImages as $key => $value){
+            echo '<div class="media">
+                <div class="media-left">
+                    <a href="single-post.php?id='.$key.'"><img class="media-object" src="/project2/images/square-small/'.$value[1].'" alt="'.$value[0].'"></a>
+                </div>
+                <div class="media-body">
+                    <h2 class="media-heading">'.$value[0].'</h2>
+                </div>
+            </div>';
+        }
+        
+        }//end if else
+    }
+            
+}
 
 
 ?>

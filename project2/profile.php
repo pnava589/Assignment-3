@@ -1,8 +1,8 @@
 <?php include 'includes/travel-config.php';
 session_start();
 if(!isset($_SESSION['UserID']) || $_SESSION['UserID'] == null){
-$_SESSION['Username'] = $_POST['username'];
-$_SESSION['Password'] = $_POST['pword'];
+    $_SESSION['Username'] = $_POST['username'];
+    $_SESSION['Password'] = $_POST['pword'];
 }
 if(!isset($_SESSION['Username']) || $_SESSION['Password'] == null){
 

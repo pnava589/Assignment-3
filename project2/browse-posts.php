@@ -80,7 +80,7 @@
                                             <h2><?php echo $row['Title'] ?></h2>
                                             <div class = "details">
                                                 Posted By <a href = "single-user.php?user=<?php echo $row['UserID'] ?>"><?php echo $row['FirstName'].' '.$row['LastName'] ?></a>
-                                                <span class = "pull-right"><?php echo $row['PostTime'] ?></span>
+                                                <span class = "pull-right"><?php echo $row['PostTime'] ?></span><!-- NEEDS REVISION !-->
                                             </div>
                                             <p class = "excerpt"> <?php echo substr($row['Message'],0,200) ?>...</p>
                                             <p class = "pull-right"><a href = "single-post.php?id=<?php echo $row['PostID'] ?>" class = "btn btn-primary btn-sm">Read More</a></p>

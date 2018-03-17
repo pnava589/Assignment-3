@@ -80,22 +80,14 @@
                </select>
                
               <input type="text"  placeholder="Search title" class="form-control" name=title onchange='submitFunction(this)'>
-               <!--<button type="submit" class="btn btn-primary">Filter</button>!-->
+               
               
              <?php if($clear){ echo '<button type="submit" class="btn btn-success">Clear</button>';}?>
               </div>
             </form>
             
             <script>
-            
-              function submitFunction(content)
-              {
-                if(content.value)
-                {
-                  content.form.submit();
-                }
-              }
-              
+             window.onload(submitFunction(content));
             </script>
 
           </div>
@@ -129,6 +121,7 @@
          </main>       
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="Javascript/functions.js"></script>
   </body>
   <?php include 'includes/footer.php' ?>
 </html>

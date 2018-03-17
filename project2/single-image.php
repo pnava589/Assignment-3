@@ -1,4 +1,4 @@
-<?php include 'includes/travel-config.php';?>
+<?php include 'includes/travel-config.php'; session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,7 +76,7 @@
                             }
                            
                                   $db = new ImageDetailsGateway($connection);
-                                  $result = $db->findParamByField(array("Path","Title","Description","Latitude","Longitude"),$val,"ImageID" );
+                                  $result = $db->findParamByField(array("CityCode","Path","Title","Description","Latitude","Longitude"),$val,"ImageID" );
                                   foreach ($result as $picture) { 
                             ?>
                                     
@@ -85,6 +85,11 @@
                                   <?php }
                                  $lat = $picture["Latitude"];
                                  $long = $picture["Longitude"];
+                                 $res = $db->retrieveRecords($db->getRating(),$val);
+                                 foreach ($res as $value) {
+                                     $rating = $value['avg(Rating)'];
+                                 }
+                                 
                                  $db = null; ?>
                          </div>
                                 
@@ -104,8 +109,8 @@
                                                 
                                              <li>By: <a href="single-user.php?user=<?php echo $row["UserID"] ?>"><?php echo $row["FirstName"].' '.$row["LastName"] ?></a></li>
                                              <li>Country: <a href="single-country.php?id=<?php echo$row["ISO"] ?>"><?php echo$row["CountryName"] ?></a></li>
-                                             <li>City: <?php echo$row["AsciiName"] ?></li>
-                                                                            
+                                             <li>City: <a href = "single-city.php?id=<?php echo $row['CityCode']?>"><?php echo$row["AsciiName"] ?></a></li>
+                                             <li>Rating: <?php echo print_stars(round($rating));?></li>                             
                                             </ul>
                                         </div>
                                     </div> <?php } ?>
@@ -114,7 +119,7 @@
                            <div class="btn-group btn-group-justified" role="group" aria-label="...">
                      
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-default" ><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
                             </div>
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>

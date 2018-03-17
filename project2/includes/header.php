@@ -6,7 +6,7 @@
                         <?php if(isset($_SESSION['UserID'])){ ?> <li><a href="/project2/logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li><?php } else { ?>
                         <li><a href="/project2/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li><?php } ?>
                         <li><a href="/project2/profile.php"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-star"></span> Favorites</a></li>
+                        <li><a href="/project2/favorites.php"><span class="glyphicon glyphicon-star"></span> Favorites</a></li>
                     </ul>
                 </div>
             </div>
