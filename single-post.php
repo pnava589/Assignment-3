@@ -29,6 +29,16 @@
                 }
                 $db = null;
 
+    $haystack = $_SERVER['HTTP_REFERER'];
+    $needle = 'https://assignment2-pnava589.c9users.io/single-post.php?';
+    if (strstr($haystack, $needle)){
+        $style="";
+    }
+    else{
+        $style='hidden';
+    }
+    
+
 ?>
 <!DOCTYPE html>
 
@@ -48,7 +58,8 @@
         <!-- end of header  -->
         
         <main class = "container">
-            <div class="alert alert-danger alrt" role="alert"><p> Post has been added to favorites!</p>
+            <div class="alert  alert-danger <?php echo $style?>" role="alert" id = "alert-box" >
+                <p> Post has been added to favorites!</p>
             </div>
              <div class = "row bg-alter">
                     <div class="col-md-12">

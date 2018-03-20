@@ -9,46 +9,6 @@ function submitFunction(content) {
     }
 
 }
-/*
-//function for hover using JavaScript
-function hover(element,id) {
-    
-    element.classList.add("hidden");
-    document.getElementById("big-"+id).classList.remove("hidden");
-    document.getElementById("big-"+id).style.position = "static";
-// it does not know what todo cause the big div is fighting to remove or add the hidden class 
-}
-
-
-function OnMouseOut(element,id) {
-   
-   document.getElementById("big-"+id).classList.add("hidden");
-   //document.getElementById("big-"+id).style.display = "none";
-  element.classList.remove("hidden");
-   
-
-}
-
-
-
-///
-function hov(element,id) {
-    document.getElementById("big-"+id).classList.remove("hidden");
-    element.classList.add("hidden");
-    //let x= document.getElementById("hide")
-    //x.style.display = "block";
-
-}
-
-
-function mout(element,id){
-    document.getElementById("big-"+id).classList.add("hidden");
-    //document.getElementById("hide").style.display = "none";
-}
-
-
-
-
 
 /* ---------------------------------------------------------------------- */
 
@@ -124,19 +84,12 @@ window.addEventListener('load',function()
 
 /* ----------------------------------ALERT TIMEOUT FUNCTION------------------------------------ */
 //set event handler for favorite button
-/*window.addEventListener('load',function(e){
-   
-     var a = document.querySelector(".favBtn");
+window.addEventListener('load',function(e){
+
+     var el = document.querySelector('.alert');
+     setTimeout(function(){el.classList.add('hidden');}, 2000);
      
-     a.addEventListener('click',function(e){
-         console.log(a);
-        setTimeout(function() {document.querySelector("#alert-box").classList.remove('hidden') }, 2000) ;
-         
-     })
-     
-     
-   
-})*/
+})
 
 
     

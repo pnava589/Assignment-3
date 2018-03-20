@@ -2,7 +2,15 @@
     include 'includes/travel-config.php'; 
     session_start();
 
-
+    $haystack = $_SERVER['HTTP_REFERER'];
+    $needle = 'https://assignment2-pnava589.c9users.io/single-image.php?';
+    if (strstr($haystack, $needle)){
+        $style="";
+    }
+    else{
+        $style='hidden';
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,14 +27,9 @@
 <body>
 
  <?php include "includes/header.php" ?>
- <?php if ($_GET['fav'] == "true"){
-     $style = "";
- } 
- else{
-     $style= "hidden";
- }
- ?>
+
         <main class="container">
+            
             <div class="alert  alert-danger <?php echo $style?>" role="alert" id = "alert-box" >
                 <p> Image has been added to favorites!</p>
             </div>
