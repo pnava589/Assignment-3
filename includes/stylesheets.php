@@ -7,4 +7,6 @@
      <link rel="stylesheet" href="css/additional-styles.css" />
      <link rel="stylesheet" href="css/captions.css" />
      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+      <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    
      <!-- <link rel="stylesheet" href="css/bootstrap.css" /> !-->

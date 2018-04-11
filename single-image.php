@@ -3,9 +3,9 @@
     session_start();
 
     $haystack = $_SERVER['HTTP_REFERER'];
-    $needle = 'https://assignment2-pnava589.c9users.io/single-image.php?';
-    if (strstr($haystack, $needle)){
-        $style="";
+    $needle = 'https://assignment-3-pnava589.c9users.io/single-image.php?';
+    if (strstr($haystack, $needle)){//contains the address
+        $style="";//remove the style
     }
     else{
         $style='hidden';
@@ -25,7 +25,7 @@
 </head>
 
 <body>
-
+    
  <?php include "includes/header.php" ?>
 
         <main class="container">
@@ -265,6 +265,10 @@
                 
             </div>
             <!--</div> end row-->
+            
+
+
+            
             
         </main>
         

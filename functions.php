@@ -368,13 +368,10 @@ function printSmall($result, $link, $id)
     foreach ($result as $key => $row) {
         
         $num = $row["$id"];
-        //echo '<div id = "'.$num.'" class ="col-md-1 normal" onmouseover = "hover(this,'.$num.')" onmouseout ="OnMouseOut(this,'.$num.')">';
+        
         echo '<div class="col-md-4 singleCountryImg" id='.$num.'>';
         echo '<a href = "' . $link . '' . $num . '">';
         echo '<img src ="/images/square-small/'. $row['Path'] .'" class="img-responsive single-image" alt = "'.$row['Title'].'" name = "'.$row['Path'].'">';
-         //echo '<div id="hide" style="display:none;"><img src ="/images/square-medium/' . $row['Path'] . '"></div>';
-        //
-        
         echo '</a>';
         echo '</div>';
     }
@@ -499,8 +496,6 @@ function addToFav($type, $title, $img, $id)
         
     } //end else if
     
-    //redirect to favs
-    //header("Location:");
     
 }
 
@@ -568,18 +563,62 @@ function displayFav($type)
                 <div class="media-body">
                     <h2 class="media-heading">' . $value[0] . '</h2>
                     <a href ="set-fav.php?action=rmImg&imgId='.$key.'"><p>remove</p></a>
+                    
                 </div>
+                
             </div>';
             }
             
+            include 'print-favorites.php';
         } //end if else
     }
     
 }
 
-function sesh()
+
+
+
+function displayFav1($type)
 {
-    $_SESSION["favImages"] = "HOMO";
+    
+    if ($type == "post") {
+        if (isset($_SESSION["favPosts"])) {
+            
+            $favPosts = $_SESSION["favPosts"];
+            foreach ($favPosts as $key => $value) {
+                echo '<div class="media">
+                <div class="media-left">
+                    <a href="single-post.php?id=' . $key . '"><img class="media-object" src="images/square-small/' . $value[1] . '" alt="' . $value[0] . '"></a>
+                </div>
+                <div class="media-body">
+                    <h2 class="media-heading">' . $value[0] . '</h2>
+                    <a href ="set-fav.php?action=rmPost&pId='.$key.'"><p>remove</p></a>
+                </div>
+            </div>';
+            }
+        } //end if
+    } else if ($type == "image") {
+        if (isset($_SESSION["favImages"])) {
+            
+            $favImages = $_SESSION["favImages"];
+            foreach ($favImages as $key => $value) {
+                echo '<div class="media">
+                <div class="media-left">
+                    <a href="single-image.php?id=' . $key . '"><img class="media-object" src="images/square-small/' . $value[1] . '" alt="' . $value[0] . '"></a>
+                </div>
+                <div class="media-body">
+                    <h2 class="media-heading">' . $value[0] . '</h2>
+                    <a href ="set-fav.php?action=rmImg&imgId='.$key.'"><p>remove</p></a>
+                    
+                </div>
+                
+            </div>';
+            }
+            
+            
+        } //end if else
+    }
+    
 }
 
 

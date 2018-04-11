@@ -48,6 +48,8 @@
                                 <li class="list-group-item"><a href="https://dev.mysql.com/doc/">MySQL Documentation</a></li>
                                 <li class="list-group-item"><a href="https://developers.google.com/maps/documentation/javascript/">Google maps API</a></li>
                                 <li class="list-group-item"><a href="https://comp3512-php-3-pnava589.c9users.io/project2/chapter14-project2.php">Lab 4</a></li>
+                                <li class="list-group-item"><a href="http://php.net/manual/en/function.strstr.php">strstr Manual</a></li>
+                                 <li class="list-group-item"><a href="https://getbootstrap.com/docs/3.3/javascript/">Modal Bootstrap</a></li>
 
                 
                               </ul>
@@ -66,4 +68,5 @@
         <?php include("includes/scripts.php");?>
        
        </body>
+       
     </html>

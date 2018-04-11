@@ -5,7 +5,7 @@
 
 <html lang="en">
     
-    <head>
+<head>
     <meta charset="utf-8">
     <title>Browse Cities</title>
 

@@ -11,6 +11,7 @@
                         <li><a href="/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li><?php } ?>
                         <li><a href="/profile.php"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                         <li><a href="/favorites.php"><span class="glyphicon glyphicon-star"></span> Favorites</a></li>
+                         <li><a href="/print-services.php"><span class="glyphicon glyphicon-star"></span> Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -39,6 +40,9 @@
                                 <li><a href="browse-images.php">Images</a></li>
                                 <li><a href="browse-users.php">Users</a></li>
                                 <li><a href="browse-posts.php">Posts</a></li>
+                                <li><a href = "print-services.php">Print JSON</a></li>
+                                <li><a href = "pedroTest.php">try</a></li>
+
                             </ul>
                         </li>
                     </ul>

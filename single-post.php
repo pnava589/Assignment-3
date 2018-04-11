@@ -30,7 +30,7 @@
                 $db = null;
 
     $haystack = $_SERVER['HTTP_REFERER'];
-    $needle = 'https://assignment2-pnava589.c9users.io/single-post.php?';
+    $needle = 'https://assignment-3-pnava589.c9users.io/single-post.php?';
     if (strstr($haystack, $needle)){
         $style="";
     }

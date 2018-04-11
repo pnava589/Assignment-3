@@ -60,7 +60,7 @@
             
                     
         </div><!--end panel-->
-                
+            
     </main>
          
     <!--footer-->
