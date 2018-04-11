@@ -35,7 +35,7 @@
             <form action="browse-images.php" method="get" class="form-horizontal" id="selection">
               <div class="form-inline">
                 <!--select cntinent-->
-                <select name="continent" class="form-control"  onchange='submitFunction(this)'>
+                <select name="continent" class="form-control submitClass"  >
                  <option value="0">Select Continent</option>
                 
                <?php
@@ -50,7 +50,7 @@
                 
               </select>     
                 <!--select country-->
-                <select name="country" class="form-control" id="selection" onchange='submitFunction(this)'>
+                <select name="country" class="form-control submitClass" id="selection" >
                 <option value="0">Select Country</option>
                 <?php 
                   /*Display dropdown menu of countries */
@@ -64,7 +64,7 @@
                 ?>
               </select>   
                 <!--select city-->
-                <select name="city" class="form-control" onchange='submitFunction(this)'>
+                <select name="city" class="form-control submitClass" >
                     <option value="0">Select City</option>
                       <?php 
                       $db =new CitiesGateway($connection);
@@ -74,7 +74,7 @@
                       <?php } $db = null; ?>
                </select>
                 <!--text search--> 
-                <input type="text"  placeholder="Search title" class="form-control" name=title onchange='submitFunction(this)'>
+                <input type="text"  placeholder="Search title" class="form-control submitClass" name=title >
                 <!--clear button-->
                 <?php if($clear){ echo '<button type="submit" class="btn btn-success">Clear</button>';}?>
               </div>
@@ -83,7 +83,7 @@
             <!--end form-->
             
             <script>
-             window.onload(submitFunction(content));
+             //window.onload(submitFunction(content));
             </script>
           </div>
           <!--end panel body-->

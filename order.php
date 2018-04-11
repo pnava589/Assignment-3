@@ -20,6 +20,7 @@
         <main class="container-fluid">
             
             <div id="row">
+               
                 
                 <div class="panel panel-primary">
                     
@@ -28,6 +29,7 @@
                     <div class="panel-body order">
                         
                         <!--Heading Row-->
+                      
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-2"><p><strong>Size</strong></p></div>
@@ -46,36 +48,34 @@
                             for($i=0; $i<$len; $i++){
                         ?>
                         <div class="row h" id=<?php echo "$i";?> >
-                              <table class="table">
-                                  <tbody>
-                                      <tr>
-                                          <td class ="col-md-2 ">
+                              
+                                          <div class ="col-md-2 ">
                                               <?php echo "<img src='images/square-small/".$_POST["path${i}"]."'/>"; ?> 
-                                          </td>
-                                          <td class ="col-md-2 ">
+                                          </div>
+                                          <div class ="col-md-2 ">
                                               <?php echo "<p id='size'>".$_POST["size${i}"]."</p>"; ?>
-                                          </td>
-                                          <td class ="col-md-2 ">
+                                          </div>
+                                          <div class ="col-md-2 ">
                                               <?php echo "<p id='paper'>".$_POST["paper${i}"]."</p>"; ?>
-                                          </td>
-                                          <td class ="col-md-2 ">
+                                          </div>
+                                          <div class ="col-md-2 ">
                                               <?php echo "<p id='frame'>".$_POST["frame${i}"]."</p>"; ?>
-                                          </td>
-                                          <td class ="col-md-2 ">
+                                          </div>
+                                          <div class ="col-md-2 ">
                                               <?php echo "<p>".$_POST["qty${i}"]."</p>"; ?>
-                                          </td>
-                                      </tr>
-                                  </tbody>
-                              </table>
+                                          </div>
+                                      
+                            
                            
                             
                         </div>
                         <?php } ?>
                         
-                        <!--Express shipping Row-->
+                        <!-- shipping Row-->
                         <div class="row">
-                            <div class="col-md-6"></div>
-                            <div class="col-md-6"><strong><?php $id = $_POST['Btn']; if($id == 0){ echo "Standard Shipping"; } else { echo "Express Shipping" ;} ?></strong></div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3"><strong><?php $id = $_POST['Btn']; if($id == 0){ echo "<p>Standard Shipping</p>"; } else { echo "<p>Express Shipping</p>" ;} ?></strong></div>
                         </div>
                         
                     </div><!--end panel body-->

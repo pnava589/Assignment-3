@@ -40,9 +40,7 @@
                                 <li><a href="browse-images.php">Images</a></li>
                                 <li><a href="browse-users.php">Users</a></li>
                                 <li><a href="browse-posts.php">Posts</a></li>
-                                <li><a href = "print-services.php">Print JSON</a></li>
-                                <li><a href = "pedroTest.php">try</a></li>
-
+                               
                             </ul>
                         </li>
                     </ul>

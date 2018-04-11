@@ -1,17 +1,19 @@
-function submitFunction(content) {
-
-    if (content.value) {
-        content.form.submit();
-    }
-
+/*dinamuically submits the filters in the browse-image site*/
+var selection = document.querySelectorAll('.submitClass');
+for (let i = 0; i < selection.length; i++) {
+    selection[i].addEventListener('change', function(e) {
+        e.target.form.submit();
+    });
 }
+
+
 
 window.addEventListener('load', function() {
     var esk = document.querySelectorAll('.singleCountryImg img');
     var node = document.querySelectorAll('#juan');
     var hid = document.querySelectorAll('.single-image');
     var pedro = document.querySelector('.container');
-    //console.log(hid);
+
     for (let i = 0; i < hid.length; i++) {
 
 
@@ -139,8 +141,11 @@ $(function() { //Run after DOM is loaded
     thumbnailImage.on("mousemove", function(e) {
         //position the preview based on the mouse mov't
         $("#preview")
-            .css("top", (e.pageY - 340) + "px")
-            .css("left", (e.pageX - 260) + "px");
+            .css("top", (e.pageY - 10))
+
+
+            .css("left", (e.pageX - 180))
+            .css("position", "left");
     });
 
     //remove frame when the mouse leaves the image
