@@ -145,7 +145,7 @@ $(function() { //Run after DOM is loaded
 
 
             .css("left", (e.pageX - 180))
-            .css("position", "left");
+        //.css("position", "left");
     });
 
     //remove frame when the mouse leaves the image

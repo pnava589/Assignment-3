@@ -36,7 +36,7 @@
                          <h4>Github</h4>
                          <div class="panel panel-info">
                               <ul class="list-group">
-                                  <li class="list-group-item"><a href="https://github.com/sarfkermali/comp3512-assignment-2">GitHub</a></li>
+                                  <li class="list-group-item"><a href="https://github.com/pnava589/Assignment-3">GitHub</a></li>
                               </ul>
                          </div>
                          <h4>External Resources Used </h4>

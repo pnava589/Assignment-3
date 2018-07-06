@@ -75,7 +75,7 @@
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-2"></div>
-                            <div class="col-md-3"><strong><?php $id = $_POST['Btn']; if($id == 0){ echo "<p>Standard Shipping</p>"; } else { echo "<p>Express Shipping</p>" ;} ?></strong></div>
+                            <div class="col-md-3  text-right"><strong><?php $id = $_POST['Btn']; if($id == 0){ echo "<p>Standard Shipping</p>"; } else { echo "<p>Express Shipping</p>" ;} ?></strong></div>
                         </div>
                         
                     </div><!--end panel body-->
